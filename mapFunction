@@ -1,0 +1,117 @@
+// GameEvents' (see below) with a log of the events that happened during the
+// game. The values are the events themselves, and the keys are the minutes in which
+// each event happened (a football game has 90 minutes plus some extra time).
+// Your tasks:
+// 1. Create an array 'events' of the different game events that happened (no
+// duplicates)
+// 2. After the game has finished, is was found that the yellow card from minute 64
+// was unfair. So remove this event from the game events log.
+// 3. Compute and log the following string to the console: "An event happened, on
+// average, every 9 minutes" (keep in mind that a game has 90 minutes)
+// 4. Loop over 'gameEvents' and log each element to the console, marking
+// whether it's in the first half or second half (after 45 min) of the game, like this:
+// [FIRST HALF] 17: ⚽ GOA
+
+// const gameEvents = new Map([
+//   [17, "⚽ GOAL"],
+//   [36, "� Substitution"],
+//   [47, "⚽ GOAL"],
+//   [61, "� Substitution"],
+//   [64, "� Yellow card"],
+//   [69, "� Red card"],
+//   [70, "� Substitution"],
+//   [72, "� Substitution"],
+//   [76, "⚽ GOAL"],
+//   [80, "⚽ GOAL"],
+//   [92, "� Yellow card"],
+// ]);
+
+class CustomMap {
+  constructor(mapValues) {
+    if (!Array.isArray(mapValues)) {
+      console.error("invalid value for map");
+      return;
+    }
+
+    const isValid = mapValues.find((element) => {
+      // console.log(!Array.isArray(element));
+      // console.log(element.length !== 2);
+      if (!Array.isArray(element) || element.length !== 2) {
+        console.log(element);
+
+        return true;
+      }
+    });
+    console.log(isValid);
+    if (!isValid === undefined) {
+      console.error("undefined value");
+      return;
+    }
+
+    this.map = mapValues;
+  }
+  getMap() {
+    return this.map;
+  }
+
+  set(key, value) {
+    const elementIndex = this.map.findIndex((element) => element[0] === key);
+    if (elementIndex < 0) {
+      console.error("didnot find the key");
+      return;
+    }
+
+    this.map[elementIndex][1] = value;
+  }
+
+  get(key) {
+    const elementIndex = this.map.findIndex((element) => element[0] === key);
+    if (elementIndex < 0) {
+      console.error("didnot find the key");
+      return;
+    }
+    return this.map[elementIndex][1];
+  }
+
+  delete(key) {
+    const elementValue = this.map.filter((element) => element[0] !== key);
+    // console.log(elementValue);
+    this.map = elementValue;
+  }
+
+  has(key) {
+    const elementIndex = this.map.findIndex((element) => element[0] === key);
+    if (elementIndex < 0) {
+      return false;
+    }
+    return true;
+  }
+}
+
+const gameEvents1 = new CustomMap([
+  [17, "⚽ GOAL"],
+  [36, "� Substitution"],
+  [47, "⚽ GOAL"],
+  [61, "� Substitution"],
+  [64, "� Yellow card"],
+  [69, "� Red card"],
+  [70, "� Substitution"],
+  [72, "� Substitution"],
+  [76, "⚽ GOAL"],
+  [80, "⚽ GOAL"],
+  [92, "� Yellow card"],
+]);
+// gameEvents1.set(17, "winner");
+// const v1 = gameEvents1.get(17);
+// console.log(gameEvents1);
+
+const v2 = gameEvents1.delete(70);
+console.log(gameEvents1);
+const v3 = gameEvents1.has(92);
+
+// console.log(gameEvents1.getMap());
+//  new Map().
+// implement get method which takes a key as parameter and returns value for that key.
+// if available else returns error key not found
+// implement delete = key parameter- delete element
+// has method
