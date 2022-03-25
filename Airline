@@ -1,0 +1,19 @@
+const flight = (flightDetails) => {
+  const diffFlights = flightDetails.split("+");
+
+  for (const flight of diffFlights) {
+    const [type, from, to, time] = flight.split(";");
+    let output = `${type.replaceAll("_", " ")} from ${from
+      .slice(0, 3)
+      .toUpperCase()} to ${to.slice(0, 3).toUpperCase()} ${time.replace(
+      ":",
+      "h"
+    )} 😡 `;
+    console.log(output);
+  }
+};
+
+flight(
+  "_Delayed_Departure;fa0937;txl121;11:25+_Arrival;ru094;fa0937;11:45+_Delayed_Arrivael;hel743;fa0937;12:05+_Departure;fa0937;lis232;12:30"
+);
+// Delayed Departure from FAO to TXL (11h25)
